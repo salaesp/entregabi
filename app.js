@@ -1,5 +1,6 @@
 var util = require('util'),
-    twitter = require('twitter');
+twitter = require('twitter'),
+express = require('express');
 var twit = new twitter({
     consumer_key: '23A1ZKCUREqzF4hgofUF9y5S1',
     consumer_secret: 'CmRHnTar1IZgB6Apjy8MZ0RjP0YLndTEjuKdxWLHTW5QOfQwVJ',
@@ -7,13 +8,11 @@ var twit = new twitter({
     access_token_secret: '2YBHRa3gT8eIRVIAh9PBZu4rqEaly8Mnn4pooKovumZOV'
 });
 
-twit.verifyCredentials(function(data) {
-        console.log(util.inspect(data));
-    });
-
-
 twit.stream('statuses/sample', function(stream) {
-    stream.on('data', function(data) {
-        console.log(util.inspect(data));
+    stream.on('data', function(tweet) {
+        if(tweet.coordinates){
+            console.log(util.inspect(tweet.coordinates));
+        }
+
     });
 });
