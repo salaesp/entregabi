@@ -53,7 +53,6 @@ function get_markers() {
     $("#loader").show();
     $.ajax({
         url: '/test2',
-	data: {search: "Simeone"},
         complete: function (data) {
             
             t = data.responseText;
